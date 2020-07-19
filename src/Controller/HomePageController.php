@@ -12,9 +12,6 @@ class HomePageController extends AbstractController
      */
     public function index()
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/HomePageController.php',
-        ]);
+        return $this->render('home.html.twig');
     }
 }
