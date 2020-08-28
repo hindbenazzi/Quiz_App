@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% form_theme form1 'bootstrap_4_layout.html.twig' %}
+{% block title %}Contact Us{% endblock %}
+
+{% block body %}
+<style>
+body{
+ margin: 0 auto;
+ background-image: url("{{asset('img/backr.jpg')}}");
+ background-repeat: no-repeat;
+ background-size: 100% 100%;
+}
+ 
+.container{
+ width: 500px;
+ height: 70%;
+ text-align: center;
+ margin: 0 auto;
+ background-color: rgba(44, 62, 80,0.7);
+ margin-top: 20px;
+}
+ 
+.container img{
+ width: 150px;
+ height: 150px;
+ margin-top: -60px;
+}
+ 
+input[type="text"],input[type="password"]{
+  color: white;
+  border: none;
+  outline: none;
+  background: none;
+ margin-top: 30px;
+ height: 45px;
+ width: 300px;
+ font-size: 18px;
+ margin-bottom: 20px;
+ padding-left: 40px;
+ border-bottom: 1px solid #320441;
+ 
+}
+ 
+.form-input::before{
+ content: "\f007";
+ font-family: "FontAwesome";
+ padding-left: 07px;
+ padding-top: 40px;
+ position: absolute;
+ font-size: 35px;
+ color: white; 
+}
+ 
+.form-input:nth-child(2)::before{
+ content: "\f023";
+ color: white; 
+}
+ 
+.btn-login{
+    width: 300px;
+ border:2px solid black;
+ padding: 15px 25px;
+ color:white;
+ background:none;
+ cursor: pointer;
+ color: #fff;
+ 
+}
+</style>
+<div class="container">
+    {{ form_start(form) }}
+
+    {{ form_widget(form.Nom) }}<br><br>
+    {{ form_widget(form.Prenom) }}<br><br>
+    {{ form_widget(form.Country) }}<br><br>
+    {{ form_widget(form.Email) }}<br><br>
+    <br><br>
+   
+    {{ form_end(form) }} 
+    {{ form_start(form1) }}
+   
+    {{ form_widget(form1.Message) }}<br><br>
+     <input type="submit" style="width: 300px; border:2px solid black; padding: 15px 25px; color:white; font-size:30px;
+       background:none;cursor: pointer; " value="Send" class="btn-login" />
+   <br><br>
+  
+    {{ form_end(form1) }} 
+ </div> 
+{% endblock %}

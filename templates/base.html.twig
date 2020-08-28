@@ -1,12 +1,35 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Quizlet</title>
+	<link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    {% block StyleSheet %}{% endblock %}
+</head>
+<body>
+<div class="wrapper">
+    <div class="sidebar">
+        <h2>Quizlet</h2>
+        <ul>
+            <li><a href="{{path('home_page')}}"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="{{path('myprofile')}}"><i class="fas fa-user"></i>My Profile</a></li>
+            <li><a href="{{path('about_us')}}"><i class="fas fa-address-card"></i>About Us</a></li>
+            <li><a href="{{path('contact_us')}}"><i class="fas fa-address-book"></i>Contact Us</a></li>
+            <li><a href="{{path('subjects')}}"><i class="far fa-file-alt"></i> &nbsp; Quizes</a></li>
+            <li><a href="#"><i class="far fa-file-alt"></i> &nbsp;My Scores</a></li>
+            <li><a href="{{path('logout')}}"><i class="fas fa-sign-out-alt"></i>&nbsp; Logout</a></li>
+        </ul> 
+        <div class="social_media">
+          <a href="https://www.facebook.com/Quizlet_app-113768543664892/"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://twitter.com/AppQuizlet"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.instagram.com/quizlet1999/"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+    
+</div>
+<dv class="inside"></dv>
+{% block body %}{% endblock %}
+</body>
 </html>

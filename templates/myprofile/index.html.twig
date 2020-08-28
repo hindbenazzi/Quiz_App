@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block title %}My profile{% endblock %}
+
+{% block body %}
+<style>
+      body{
+ margin: 0 auto;
+ background-image: url("{{asset('img/backr.jpg')}}");
+ background-repeat: no-repeat;
+ background-size: 100% 720px;
+}
+  
+.container{
+ width: 500px;
+ height: 550px;
+ text-align: center;
+ margin: 0 auto;
+ background-color: rgba(44, 62, 80,0.7);
+ margin-top: 5px;
+}
+form {
+ background-color:#FAFAFA;
+ padding:10px;
+ width:280px;
+ }
+fieldset {
+ padding:0 20px 20px 20px;
+ margin-bottom:10px;
+ border:1px solid rgb(18, 5, 49);
+ }
+legend {
+ color:rgb(18, 5, 49);
+ font-weight:bold
+ }
+label {
+ margin-top:10px;
+ display:block;
+ display:inline;
+ }
+ label.inline {
+ display:inline;
+ 
+ }
+input, textarea, select, option {
+ background-color:#FFF3F3;
+ }
+input, textarea, select {
+ padding:3px;
+ color: white;
+  border: none;
+  outline: none;
+  background: none;
+  border-bottom: 1px solid #320441;
+ width:200px;
+ 
+ }
+ label{
+     display:inline-block;
+     width:200px;
+ }
+ .date{
+     width:100px;
+ }
+ .btn{
+     border-radius: 5px;
+     background-color: #320441;
+     cursor: pointer;
+ }
+ h1{
+margin-left: 45%;
+color: #320441;
+ }
+</style>
+
+<br><br>
+    {{ form_start(form, { 'attr' : { 'class': 'container' } }) }}
+    <fieldset>
+    <legend>Login informations:</legend>
+    <label   ><b>User Name:</b></label>
+    {{ form_widget(form.UserName) }}<br><br>
+    <label   ><b> Password: </b></label>
+    {{ form_widget(form.Password) }}<br><br>
+    </fieldset>
+    <fieldset>
+    <legend>Player informations:</legend>
+    <label   ><b>Last Name: </b></label>
+    {{ form_widget(form.Nom) }}<br><br>
+    <label   ><b>First Name: </b></label>
+    {{ form_widget(form.Prenom) }}<br><br>
+    <label   ><b>Birth Date: </b></label>
+    {{ form_widget(form.DateNaissance) }}<br><br>
+    <label   ><b> Cuntry: </b></label>
+    {{ form_widget(form.Country) }}<br><br>
+    <label   ><b> Email: </b></label>
+    {{ form_widget(form.Email) }}<br><br>
+    <label   ><b> Telephone: </b></label>
+    {{ form_widget(form.Telephone) }}<br>
+    <br>
+    </fieldset>
+     <input type="submit" style="width: 300px; border:2px solid black; padding: 15px 25px; color:white; 
+       background:none;cursor: pointer; color: rgb(22, 22, 22);" value="Update My infos" class="btn-login" />
+        {{ form_end(form) }} 
+ </div> 
+{% endblock %}

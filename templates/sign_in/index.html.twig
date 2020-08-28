@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head lang="fr">
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+<title>sign in </title>
+<meta charset="utf-8">
+<style>
+    body{
+ margin: 0 auto;
+ background-image: url("{{asset('img/backr.jpg')}}");
+ background-repeat: no-repeat;
+ background-size: 100% 720px;
+}
+  
+.container{
+ width: 500px;
+ height: 550px;
+ text-align: center;
+ margin: 0 auto;
+ background-color: rgba(44, 62, 80,0.7);
+ margin-top: 5px;
+}
+form {
+ background-color:#FAFAFA;
+ padding:10px;
+ width:280px;
+ }
+fieldset {
+ padding:0 20px 20px 20px;
+ margin-bottom:10px;
+ border:1px solid rgb(18, 5, 49);
+ }
+legend {
+ color:rgb(18, 5, 49);
+ font-weight:bold
+ }
+label {
+ margin-top:10px;
+ display:block;
+ display:inline;
+ }
+ label.inline {
+ display:inline;
+ 
+ }
+input, textarea, select, option {
+ background-color:#FFF3F3;
+ }
+input, textarea, select {
+ padding:3px;
+ color: white;
+  border: none;
+  outline: none;
+  background: none;
+  border-bottom: 1px solid #320441;
+ width:200px;
+ 
+ }
+ label{
+     display:inline-block;
+     width:200px;
+ }
+ .date{
+     width:100px;
+ }
+ .btn{
+     border-radius: 5px;
+     background-color: #320441;
+     cursor: pointer;
+ }
+ h1{
+margin-left: 45%;
+color: #320441;
+ }
+</style>
+</head>
+<body>
+   
+    <h1>Inscription</h1>
+    {{ form_start(form, { 'attr' : { 'class': 'container' } }) }}
+    <fieldset>
+    <legend>Information du compte:</legend>
+    <label   ><b>User Name:</b></label>
+    {{ form_widget(form.UserName) }}<br><br>
+    <label   ><b> Mot de Passe: </b></label>
+    {{ form_widget(form.Password) }}<br><br>
+    </fieldset>
+    <fieldset>
+    <legend>Information de l'utilisateur:</legend>
+    <label   ><b>Nom: </b></label>
+    {{ form_widget(form.Nom) }}<br><br>
+    <label   ><b>Prenom: </b></label>
+    {{ form_widget(form.Prenom) }}<br><br>
+    <label   ><b>Date de Naissance: </b></label>
+    {{ form_widget(form.DateNaissance) }}<br><br>
+    <label   ><b> Pays: </b></label>
+    {{ form_widget(form.Country) }}<br><br>
+    <label   ><b> Email: </b></label>
+    {{ form_widget(form.Email) }}<br><br>
+    <label   ><b> Telephone: </b></label>
+    {{ form_widget(form.Telephone) }}<br>
+    <br>
+    </fieldset>
+    <p>
+    <input type="submit" class="btn" value="Envoyer" />
+    <a href="{{path('Tologin_page')}}"><input type="button" class="btn" value="Annuler"/></a>
+    </p>
+    {{ form_end(form) }}
+    
+</body>
+</html>

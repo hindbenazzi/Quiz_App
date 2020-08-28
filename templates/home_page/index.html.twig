@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+{% block StyleSheet %}
+<style>
+body{
+ margin: 0 auto;
+ background-image: url("{{asset('img/backr.jpg')}}");
+ background-repeat: no-repeat;
+ background-size: 100% 100%;
+}
+ 
+.container{
+ width: 500px;
+ height: 610px;
+ text-align: center;
+ margin: 0 auto;
+ background-color: rgba(44, 62, 80,0.7);
+ margin-top: 10px;
+ margin-bottom: 10px;
+}
+
+.btn-group button {
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+  
+}
+img{
+    width:50%;
+    height:50%;
+}
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+#css{
+    width: 170px;
+    height: 170px;
+background-color: tomato;
+margin-right: 40px;
+    margin-left: 55px;
+}
+#html{
+    width: 170px;
+    height: 170px;
+    background-color: plum;
+    
+}
+#js{
+    width: 170px;
+    height: 170px;
+    background-color: purple;
+    margin-right: 40px;
+    margin-left: 55px;
+}
+#php{
+    width: 170px;
+    height: 170px;
+    background-color: steelblue;
+}
+#ajax{
+    width: 170px;
+    height: 170px;
+    background-color: deeppink;
+    margin-right: 40px;
+    margin-left: 55px;
+}
+#jquery{
+    width: 170px;
+    height: 170px;
+    background-color: chocolate;
+}
+</style>
+{% endblock %}
+{% block body %}
+<div class="container">
+ <img src="img/Q.png" style="width:500px;height:500px;"/><br><br>
+ 
+    
+    <p> Welcome to Quizlet quiz application</p>
+ </div>
+{% endblock %}

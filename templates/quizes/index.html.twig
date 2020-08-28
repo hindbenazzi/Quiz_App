@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello QuizesController!{% endblock %}
+{% block StyleSheet %}
+<style>
+body{
+ margin: 0 auto;
+ background-image: url("{{asset('img/backr.jpg')}}");
+ background-repeat: no-repeat;
+ background-size: 100% 100%;
+}
+ 
+.container{
+ width: 70%;
+ text-align: center;
+ margin: 0 auto;
+ background-color: rgba(44, 62, 80,0.7);
+ margin-top: 10px;
+ margin-bottom: 10px;
+ margin-left:300px;
+}
+
+.btn-group button {
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+  
+}
+img{
+    width:50%;
+    height:50%;
+}
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.sub{
+    background:none;
+    color:#D0CBDB;
+    width:300px;
+    height:100px;
+    margin-top:10px;
+    margin-bottom:10px;
+    margin-left:20px;
+    margin-right:20px;
+    cursor:pointer;
+    font-size:30px;
+    border:4px solid #27043C;
+    text-transform:uppercase;
+    position:relative;
+}
+.sub::before,.sub::after{
+    content:"";
+    position:absolute;
+    width:14px;
+    height:4px;
+    background:#D0CBDB;
+    transform:sKewX(50deg);
+    transition:.4s linear;
+}
+.sub::before{
+    top:-4px;
+    left:10%;
+}
+.sub::after{
+    bottom:-4px;
+    right:10%;
+}
+.sub:hover::before{
+    left:80%;
+}
+.sub:hover::after{
+    right:80%;
+}
+.create{
+    background:#581845;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+.create:hover{
+  background:#fff;
+  color:#581845;
+}
+.create:before,.create:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #581845 ;
+  transition:400ms ease all;
+}
+.create:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.create:hover:before,.create:hover:after{
+  width:100%;
+  transition:2s ease all;
+}
+</style>
+{% endblock %}
+{% block body %}
+<div class="container">
+   
+ {% for Subject in Subjects%}
+  <a href="#"><button class="sub">{{Subject.Title}}</button></a>
+ {% endfor %}
+<br><br><br>
+<a href="{{path('CreateSubject')}}"><button class="create">Create a new Subject</button></a>
+</div>
+
+{% endblock %}
