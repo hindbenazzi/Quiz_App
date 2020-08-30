@@ -17,7 +17,7 @@ class ContactUsController extends AbstractController
     /**
      * @Route("/contact_us", name="contact_us")
      */
-    public function index(EntityManagerInterface $em,Request $request,SessionInterface $session)
+    public function index(EntityManagerInterface $em,Request $request,SessionInterface $session,\Swift_Mailer $mailer)
     {
         $repo=$em->getRepository(Player::class);
         $player= $repo->findOneBy(array('UserName'=>$session->get('Player')));
@@ -38,6 +38,17 @@ class ContactUsController extends AbstractController
         if ($form1->isSubmitted() && $form1->isValid()) {
             $em->persist($rec);
             $em->flush();
+            $message = (new \Swift_Message('Hello Email'))
+          ->setFrom('hindouxa.hinda@gmail.com')
+          ->setTo('hindb788@gmail.com')
+          ->setBody( $this->renderView(
+            'contact_us/email.txt.twig',
+            ['LastName' => $player->getNom(),'FirstName'=>$player->getPrenom(),'Telephone' => $player->getTelephone(),'Email' => $player->getEmail()
+            ,'Message' => $rec->getMessage()]
+        )
+          )
+      ;
+      $mailer->send($message);
             return $this->redirect($this->generateUrl('home_page'));
             
         }
