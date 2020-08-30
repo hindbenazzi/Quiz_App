@@ -64,9 +64,15 @@ class Player
      */
     private $reclamations;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Quiz::class, mappedBy="CreatedBy")
+     */
+    private $quizzes;
+
     public function __construct()
     {
         $this->reclamations = new ArrayCollection();
+        $this->quizzes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -195,6 +201,37 @@ class Player
             // set the owning side to null (unless already changed)
             if ($reclamation->getPlayer() === $this) {
                 $reclamation->setPlayer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Quiz[]
+     */
+    public function getQuizzes(): Collection
+    {
+        return $this->quizzes;
+    }
+
+    public function addQuiz(Quiz $quiz): self
+    {
+        if (!$this->quizzes->contains($quiz)) {
+            $this->quizzes[] = $quiz;
+            $quiz->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuiz(Quiz $quiz): self
+    {
+        if ($this->quizzes->contains($quiz)) {
+            $this->quizzes->removeElement($quiz);
+            // set the owning side to null (unless already changed)
+            if ($quiz->getCreatedBy() === $this) {
+                $quiz->setCreatedBy(null);
             }
         }
 

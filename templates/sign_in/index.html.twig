@@ -76,24 +76,24 @@ color: #320441;
 </head>
 <body>
    
-    <h1>Inscription</h1>
+    <h1>Registration</h1>
     {{ form_start(form, { 'attr' : { 'class': 'container' } }) }}
     <fieldset>
-    <legend>Information du compte:</legend>
+    <legend>Login informations:</legend>
     <label   ><b>User Name:</b></label>
     {{ form_widget(form.UserName) }}<br><br>
-    <label   ><b> Mot de Passe: </b></label>
+    <label   ><b> Password: </b></label>
     {{ form_widget(form.Password) }}<br><br>
     </fieldset>
     <fieldset>
-    <legend>Information de l'utilisateur:</legend>
-    <label   ><b>Nom: </b></label>
+    <legend>Player informations:</legend>
+    <label   ><b>Last Name: </b></label>
     {{ form_widget(form.Nom) }}<br><br>
-    <label   ><b>Prenom: </b></label>
+    <label   ><b>First Name: </b></label>
     {{ form_widget(form.Prenom) }}<br><br>
-    <label   ><b>Date de Naissance: </b></label>
+    <label   ><b>Birth Date: </b></label>
     {{ form_widget(form.DateNaissance) }}<br><br>
-    <label   ><b> Pays: </b></label>
+    <label   ><b> Country: </b></label>
     {{ form_widget(form.Country) }}<br><br>
     <label   ><b> Email: </b></label>
     {{ form_widget(form.Email) }}<br><br>
@@ -102,8 +102,8 @@ color: #320441;
     <br>
     </fieldset>
     <p>
-    <input type="submit" class="btn" value="Envoyer" />
-    <a href="{{path('Tologin_page')}}"><input type="button" class="btn" value="Annuler"/></a>
+    <input type="submit" class="btn" value="Submit" />
+    <a href="{{path('Tologin_page')}}"><input type="button" class="btn" value="cancel"/></a>
     </p>
     {{ form_end(form) }}
     

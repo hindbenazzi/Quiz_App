@@ -1,19 +1,21 @@
 {% extends 'base.html.twig' %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
-{% block title %}Create Subject{% endblock %}
+{% block title %}Create Quiz{% endblock %}
 {% block StyleSheet %}
+<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" type="text/css" href="../css/style.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <style>
 body{
  margin: 0 auto;
  background-image: url("{{asset('img/backr.jpg')}}");
  background-repeat: no-repeat;
- 
+ background-size: 100% 100%;
 }
  
 .container{
  width: 500px;
- height: 610px;
+ height: 70%;
  text-align: center;
  margin: 0 auto;
  background-color: rgba(44, 62, 80,0.7);
@@ -75,15 +77,21 @@ input, textarea, select {
 {% endblock %}
 {% block body %}
 
-   <div class="container">
- <br><br><br>
+<div class="container">
+ <br>
  {{ form_start(form) }}
-   <label ><b>Subject Title: </b></label><br>
-   {{ form_widget(form.Title) }}<br><br>
-   <label ><b>Subject Description: </b></label><br>
-   {{ form_widget(form.Description) }}<br><br>
+   <label   ><b>Quiz Title: </b></label><br>
+   {{ form_widget(form.Title) }}
+   <label   ><b>Quiz description: </b></label><br>
+   {{ form_widget(form.Description) }}
+   <label   ><b>Number of questions: </b></label><br>
+   {{ form_widget(form.NbrQst) }}
+   <label   ><b>Level of difficulty from 1 to 5: </b></label><br>
+   {{ form_widget(form.difficulty) }}
+   <label   ><b>Image for your quiz: </b></label><br>
+   {{ form_widget(form.ImageUrlFile) }}<br><br>
      <input type="submit" style="width: 300px;height:60px; border:2px solid black; padding: 15px 25px; color:white; font-size:30px;
-       background:none;cursor: pointer; " value="Create Subject" class="btn-login" />
+       background:none;cursor: pointer; " value="Create Quiz" class="btn-login" />
    <br><br>
   
    {{ form_end(form) }} 

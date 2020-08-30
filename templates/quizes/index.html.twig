@@ -117,7 +117,7 @@ img{
 <div class="container">
    
  {% for Subject in Subjects%}
-  <a href="#"><button class="sub">{{Subject.Title}}</button></a>
+  <a href="{{path('ShowQuizzes',{id:Subject.Id})}}"><button class="sub">{{Subject.Title}}</button></a>
  {% endfor %}
 <br><br><br>
 <a href="{{path('CreateSubject')}}"><button class="create">Create a new Subject</button></a>

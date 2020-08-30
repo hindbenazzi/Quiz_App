@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SubjectRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +28,16 @@ class Subject
      * @ORM\Column(type="text", nullable=true)
      */
     private $Description;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Quiz::class, mappedBy="Subject")
+     */
+    private $quizzes;
+
+    public function __construct()
+    {
+        $this->quizzes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -52,6 +64,37 @@ class Subject
     public function setDescription(?string $Description): self
     {
         $this->Description = $Description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Quiz[]
+     */
+    public function getQuizzes(): Collection
+    {
+        return $this->quizzes;
+    }
+
+    public function addQuiz(Quiz $quiz): self
+    {
+        if (!$this->quizzes->contains($quiz)) {
+            $this->quizzes[] = $quiz;
+            $quiz->setSubject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuiz(Quiz $quiz): self
+    {
+        if ($this->quizzes->contains($quiz)) {
+            $this->quizzes->removeElement($quiz);
+            // set the owning side to null (unless already changed)
+            if ($quiz->getSubject() === $this) {
+                $quiz->setSubject(null);
+            }
+        }
 
         return $this;
     }
