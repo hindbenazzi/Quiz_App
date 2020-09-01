@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %} 
+{% block JavaScript %} 
+   <script language = "javascript" 
+      src = "https://code.jquery.com/jquery-2.2.4.min.js"></script> 
+   
+   <script language = "javascript">  
+      $(document).ready(function(){   
+         $("#loadstudent").on("click", function(event){  
+            $.ajax({  
+               url:        '/StartQuiz/{{Questions[0].Quiz.id}}',  
+               type:       'POST',   
+               dataType:   'json',  
+               async:      true,  
+               
+               success: function(data, status) {  
+                  var e = $('<br><form>');  
+                  $('#student').html('');  
+                  $('#student').append(e);  
+                  
+                  for(i = 0; i < data.length; i++) {  
+                     student = data[i];  
+                     var e = $('<tr><td id = "name"></td><td id = "address"></td></tr>');
+                     
+                     $('#name', e).html(student['name']);  
+                     $('#address', e).html(student['address']);  
+                     $('#student').append(e);  
+                  }  
+               },  
+               error : function(xhr, textStatus, errorThrown) {  
+                  alert('Ajax request failed.');  
+               }  
+            });  
+         });  
+      });  
+   </script> 
+    
+{% endblock %}  
+
+{% block StyleSheet %} 
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+   <style> 
+   #student{
+      margin-left:5px;
+   }
+     input{
+        width:10px;
+        display:inline-block; 
+        margin-left:5px;
+     } 
+     body{
+ margin: 0 auto;
+ background-image: url("{{asset('img/backr.jpg')}}");
+ background-repeat: no-repeat;
+ 
+}
+ 
+.container{
+ width: 500px;
+ height: 70%;
+ text-align: center;
+ margin: 0 auto;
+ background-color: rgba(44, 62, 80,0.7);
+ margin-top: 10px;
+ margin-bottom: 10px;
+}
+.filing{
+   height:200px;;
+}
+ </style> 
+{% endblock %} 
+
+{% block body %} 
+<div class="filing">  </div>
+<div class="container">
+   
+   
+   <div class = "table">  <br><br><br><br>
+      <div id = "student">
+      <form>
+      {{Questions[0].Contenu}}<br>
+      <input type="radio" name="Ans" value="Ans1">{{ Questions[0].Ans1 }}<br>
+      <input type="radio" name="Ans" value="Ans2">{{ Questions[0].Ans2 }}<br>
+      <input type="radio" name="Ans" value="Ans3">{{ Questions[0].Ans3 }}<br>
+      <input type="radio" name="Ans" value="Ans4">{{ Questions[0].Ans4 }}<br>
+      </form>
+      </div>  
+   </div>  
+   </br> 
+   </br>  
+   <a id = "loadstudent" href = "#">Load student information</a> <br><br>  
+   </div> 
+{% endblock %} 

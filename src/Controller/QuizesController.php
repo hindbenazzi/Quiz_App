@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -111,6 +112,62 @@ class QuizesController extends AbstractController
         return $this->redirect($this->generateUrl('AddQuestions',['id' => $id]));
         }
         return $this->render('quizes/AddQuestions.html.twig', ['form' => $form->createView()]);
+    }
+    /**
+     * @Route("/LoadQuiz/{id}", name="LoadQuiz")
+     */
+     public function LoadQuiz($id,EntityManagerInterface $em,Request $request,SessionInterface $session)
+     {
+        $repo3=$em->getRepository(Quiz::class);
+        $quiz= $repo3->findOneBy(array('id'=>$id));
+        $repo=$em->getRepository(Question::class);
+        $Questions=$repo->findBy(array('Quiz'=>$quiz));
+        $Qsts=array();
+        foreach($Questions as $key => $value){
+            $Qsts[$key]=$value;
+        }
+        $session->set('NbrQst',count($Qsts));
+        $session->set('QstId',0);
+        return $this->redirect($this->generateUrl('StartQuiz',['id' => $id]));
+     }
+    /**
+     * @Route("/StartQuiz/{id}", name="StartQuiz")
+     */
+    public function StartQuiz($id,EntityManagerInterface $em,Request $request,SessionInterface $session)
+    {
+    
+        $repo3=$em->getRepository(Quiz::class);
+        $quiz= $repo3->findOneBy(array('id'=>$id));
+        $repo=$em->getRepository(Question::class);
+        $Questions=$repo->findBy(array('Quiz'=>$quiz));
+        $Qsts=array();
+        foreach($Questions as $key => $value){
+            $Qsts[$key]=$value;
+        }
+        
+        if ($request->isXmlHttpRequest() || $request->query->get('showJson') == 1) {  
+            $jsonData = array();  
+            $idx = 0;  
+            $session->set('QstId',(int)$session->get('QstId')+1);
+            if($session->get('QstId')<$session->get('NbrQst')){
+               $temp = array(
+                  'Contenu' => $Questions[$session->get('QstId')]->getContenu(),  
+                  'Ans1' => $Questions[$session->get('QstId')]->getAns1(),
+                  'Ans2' => $Questions[$session->get('QstId')]->getAns1(), 
+                  'Ans3' => $Questions[$session->get('QstId')]->getAns1(), 
+                  'Ans4' => $Questions[$session->get('QstId')]->getAns1()  
+               );
+               $jsonData[$idx++] = $temp;  
+            }else{
+                $jsonData[$idx++] ="finished"; 
+            } 
+            return new JsonResponse($jsonData); 
+         }  else {  
+         // Normal request  
+         return $this->render('quizes/StartQuiz.html.twig',['Questions'=>$Questions]);
+        }
+        
+        return $this->render('quizes/StartQuiz.html.twig',['Questions'=>$Questions,'nbrQst'=>$session->get('QstId')]);
     }
     /**
      * @Route("/MYQuizzes", name="MyQuizzes")
